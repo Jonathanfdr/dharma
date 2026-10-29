@@ -31,7 +31,7 @@ Você escolhe **quantas sessões** e **quantos minutos** cada uma. Não há inte
 
 **Como funciona com a tela bloqueada:** o áudio roda num *Foreground Service* (tipo mediaPlayback) com *WakeLock*, e uma notificação com contagem regressiva e botões Pausar/Encerrar. Em alguns celulares (Xiaomi, Samsung, Huawei…) o sistema é agressivo com bateria; se a sessão cortar, desative a otimização de bateria para o Dharma em *Configurações → Apps → Dharma → Bateria → Sem restrições*.
 
-> O APK é assinado com uma chave pessoal incluída no projeto (`android/dharma.keystore`), serve só para instalação direta (sideload).
+> O APK de release é assinado com uma chave que fica fora do repositório (GitHub Secrets `KEYSTORE_BASE64` e `KEYSTORE_PASSWORD`). Compilando localmente sem elas, usa a chave de debug do Android (também instala normalmente).
 
 ## Release automático (GitHub Actions)
 

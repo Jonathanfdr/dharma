@@ -15,20 +15,24 @@ android {
         versionName = (project.findProperty("versionName") as String?) ?: "1.0"
     }
 
+    // A chave de release NÃO fica no repositório: vem de variáveis de ambiente
+    // (GitHub Secrets no CI, ou o seu shell localmente). Sem elas, assina com a chave de debug.
+    val releaseKeystore = System.getenv("DHARMA_KEYSTORE_FILE")
     signingConfigs {
-        // Chave pessoal só para instalar o APK no seu celular (sideload).
-        create("personal") {
-            storeFile = file("../dharma.keystore")
-            storePassword = "dharma123"
-            keyAlias = "dharma"
-            keyPassword = "dharma123"
+        if (releaseKeystore != null) {
+            create("release") {
+                storeFile = file(releaseKeystore)
+                storePassword = System.getenv("DHARMA_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("DHARMA_KEY_ALIAS") ?: "dharma"
+                keyPassword = System.getenv("DHARMA_KEYSTORE_PASSWORD")
+            }
         }
     }
 
     buildTypes {
         release {
             isMinifyEnabled = false
-            signingConfig = signingConfigs.getByName("personal")
+            signingConfig = signingConfigs.getByName(if (releaseKeystore != null) "release" else "debug")
         }
     }
 

@@ -28,8 +28,14 @@ jobs:
           echo "name=$V" >> "$GITHUB_OUTPUT"
           echo "code=$GITHUB_RUN_NUMBER" >> "$GITHUB_OUTPUT"
 
+      - name: Restaurar keystore dos Secrets
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > "$RUNNER_TEMP/dharma.keystore"
+
       - name: Compilar APK
         working-directory: android
+        env:
+          DHARMA_KEYSTORE_FILE: ${{ runner.temp }}/dharma.keystore
+          DHARMA_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
         run: ./gradlew assembleRelease -PversionName="${{ steps.ver.outputs.name }}" -PversionCode="${{ steps.ver.outputs.code }}"
 
       - name: Nomear APK

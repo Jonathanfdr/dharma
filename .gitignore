@@ -16,3 +16,7 @@ dist/*.apk
 # Sistema / editor
 .DS_Store
 .claude/
+
+# chaves de assinatura nunca vão pro repo
+*.keystore
+*.jks
