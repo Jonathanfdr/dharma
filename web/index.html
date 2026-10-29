@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14112b">
+<title>Dharma · Meditação</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header>
+    <div class="lotus">☸</div>
+    <h1>Dharma</h1>
+    <p class="sub">Sessões de meditação com sino de tigela</p>
+  </header>
+
+  <!-- Tela de configuração -->
+  <section id="setup">
+    <div class="card">
+      <div class="row">
+        <div class="field">
+          <label>Sessões</label>
+          <div class="stepper">
+            <button data-step="sessions" data-d="-1" aria-label="menos">−</button>
+            <input id="sessions" type="number" min="1" max="30" inputmode="numeric">
+            <button data-step="sessions" data-d="1" aria-label="mais">+</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>Minutos por sessão</label>
+          <div class="stepper">
+            <button data-step="minutes" data-d="-5" aria-label="menos">−</button>
+            <input id="minutes" type="number" min="1" max="240" inputmode="numeric">
+            <button data-step="minutes" data-d="5" aria-label="mais">+</button>
+          </div>
+        </div>
+      </div>
+      <p id="summary" class="summary"></p>
+      <p id="flow" class="flow"></p>
+    </div>
+
+    <div class="card">
+      <h2>Música de fundo</h2>
+      <div id="musicChips" class="chips"></div>
+      <div class="slider"><span>Volume</span><input id="musicVol" type="range" min="0" max="100"></div>
+    </div>
+
+    <div class="card">
+      <h2>Efeitos ambientes</h2>
+      <div id="fxList"></div>
+    </div>
+
+    <div class="card">
+      <h2>Ajustes</h2>
+      <div class="slider"><span>Volume do sino</span><input id="bellVol" type="range" min="0" max="100"></div>
+      <div class="slider"><span>Fade-out final <b id="fadeVal"></b></span><input id="fadeOut" type="range" min="5" max="60" step="5"></div>
+      <p class="hint">A música e os efeitos entram suavemente depois do primeiro sino e somem em fade-out antes do último sino.</p>
+    </div>
+
+    <button id="play" class="primary">▶ Começar meditação</button>
+  </section>
+
+  <!-- Tela de sessão -->
+  <section id="running" hidden>
+    <div class="ring-wrap">
+      <svg viewBox="0 0 200 200" class="ring">
+        <circle cx="100" cy="100" r="90" class="ring-bg"/>
+        <circle id="ringFg" cx="100" cy="100" r="90" class="ring-fg"/>
+      </svg>
+      <div class="ring-text">
+        <div id="phase" class="phase">Sessão 1 de 1</div>
+        <div id="clock" class="clock">00:00</div>
+        <div id="total" class="total"></div>
+      </div>
+    </div>
+    <div class="dots" id="dots"></div>
+
+    <div class="card live">
+      <div class="slider"><span>Música</span><input id="liveMusic" type="range" min="0" max="100"></div>
+      <div id="liveFx"></div>
+    </div>
+
+    <div class="controls">
+      <button id="pause" class="secondary">⏸ Pausar</button>
+      <button id="stop" class="danger">■ Encerrar</button>
+    </div>
+  </section>
+
+  <footer>Feche os olhos. Respire.</footer>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

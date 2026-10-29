@@ -1,0 +1,18 @@
+# Python / ferramentas
+.venv/
+__pycache__/
+
+# Android / Gradle
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+*.iml
+.idea/
+
+# APK vai como Release do GitHub, não no histórico
+dist/*.apk
+
+# Sistema / editor
+.DS_Store
+.claude/
